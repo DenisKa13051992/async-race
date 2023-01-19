@@ -41,7 +41,7 @@ const createBodyUI = async () => {
         <div class="panel-create">
           <input class="input-create-name" type="text" placeholder="Enter car name">
           <input class="input-create-color" type="color">
-          <button class="btn btn-create">create</button>
+          <button class="btn btn-create" disabled="true">create</button>
         </div>
         <div class="panel-update">
           <input class="input-create-new-name" type="text" disabled="true" placeholder="Enter new сar name">

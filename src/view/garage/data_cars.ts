@@ -16,14 +16,14 @@ export const modelOfCars: string[] = [
   'GS', 'Gallardo', 'Aventador', '911', 'Cayenne'
 ];
 
-const getCarModel = () => {
+export const getCarModel = () => {
   const brandCar: string = brandOfCars[Math.floor(Math.random() * brandOfCars.length)];
   const modelCar: string = modelOfCars[Math.floor(Math.random() * modelOfCars.length)];
-  const carModel: string = brandCar + modelCar;
+  const carModel: string = `${brandCar}  ${modelCar}`;
   return carModel;
 };
 
-const getCarColor = () => {
+export const getCarColor = () => {
   function randomColor(){
     return String(Math.floor(Math.random() * 255));
   }
@@ -31,7 +31,3 @@ const getCarColor = () => {
   return carColor;
 };
 
-// export const generateRandomCars = (carCount = 100): Array<SimpleCar> =>
-//   new Array(carCount)
-//     .fill(1)
-//     .map(() => ({ name: getCarModel(), color: getCarColor() }));
