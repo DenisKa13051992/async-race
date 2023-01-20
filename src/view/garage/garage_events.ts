@@ -1,5 +1,5 @@
 import { createCarUI } from '../ui';
-import { createCarAPI, cars, getCarsAPI, updateCarAPI, ArraysOfCars } from './api_garage';
+import { createCarAPI, cars, getCarsAPI, updateCarAPI, ArraysOfCars, deleteCarAPI } from './api_garage';
 import { getCarColor, getCarModel } from './data_cars';
 
 const inputCreateNewColor = <HTMLInputElement>document.querySelector('.input-create-new-color');
@@ -8,27 +8,36 @@ const generateCars = <HTMLElement>document.querySelector('.generate-cars');
 const btnGenerateCars = <HTMLElement>document.querySelector('.btn-generate-cars');
 const carsInGarage = <HTMLElement>document.querySelector('.cars-in-garage');
 const btnGarage = <HTMLElement>document.querySelector('.btn-garage');
-const btnWinners = <HTMLElement>document.querySelector('.btn-winners');
+export const btnWinners = <HTMLElement>document.querySelector('.btn-winners');
 const btnUpdate = <HTMLInputElement>document.querySelector('.btn-update');
 const inputCreateNewName = <HTMLInputElement>document.querySelector('.input-create-new-name');
 const inputCreateColor = <HTMLInputElement>document.querySelector('.input-create-color');
 const inputCreateName = <HTMLInputElement>document.querySelector('.input-create-name');
 const btnNext = <HTMLButtonElement>document.querySelector('.btn-next');
+const btnPrev = <HTMLButtonElement>document.querySelector('.btn-prev');
 const garagePage = <HTMLElement>document.querySelector('.garage-page');
 const winnersPage = <HTMLElement>document.querySelector('.winners-page');
-const btnCreate = <HTMLInputElement>document.querySelector('.btn-create');
+const btnCreate = <HTMLButtonElement>document.querySelector('.btn-create');
+const pageNumberHTML = <HTMLElement>document.querySelector('.page-number');
 let updatedCarId: number;
 export let pageNumber = 1;
 
 
+export const checkCars = () =>{ getCarsAPI(pageNumber).then(() => {
+if (cars / 7 > pageNumber) {btnNext.disabled = false; console.log(cars / 7, pageNumber)};
+if (pageNumber === 1) {btnPrev.disabled = true; console.log(cars / 7, pageNumber)}
+if (pageNumber > 1) {btnPrev.disabled = false; console.log(cars / 7, pageNumber)}
+})}
+checkCars();
+
 btnGarage.addEventListener('click', () => {
-  winnersPage.classList.add('hide');
-  garagePage.classList.remove('hide');
+  winnersPage.style.display = 'none';
+  garagePage.style.display = 'block';
 });
 
 btnWinners.addEventListener('click', () => {
-  garagePage.classList.add('hide');
-  winnersPage.classList.remove('hide');
+  garagePage.style.display = 'none';
+  winnersPage.style.display = 'block';
 });
 
 
@@ -39,10 +48,12 @@ export const updateCarsUI = () => {
     let carsForRender: string = '';
     arr.forEach((car) => {
       carsForRender += `${createCarUI(car.id, car.name, car.color)}`;
+      console.log(car.color);
     });
     carsInGarage.textContent = `(${cars})`;
     carsContainer.innerHTML = carsForRender;
-  });
+    });
+
 };
 updateCarsUI();
 
@@ -94,3 +105,43 @@ generateCars.addEventListener('click', (event) => {
     btnUpdate.disabled = true;
   }
 });
+
+
+
+btnNext.addEventListener('click', () => {
+  if (cars / 7 > pageNumber) {pageNumber += 1; updateCarsUI(); pageNumberHTML.textContent = String(pageNumber); console.log(cars / 7, pageNumber);
+  if (cars / 7 < pageNumber) {btnNext.disabled = true; console.log(cars / 7, pageNumber)}}
+  checkCars();
+})
+
+btnPrev.addEventListener('click', () => {
+  if (pageNumber > 1) {pageNumber -= 1; updateCarsUI(); pageNumberHTML.textContent = String(pageNumber); console.log(cars / 7, pageNumber)
+  };
+  checkCars();
+})
+
+
+
+
+carsContainer.addEventListener('click', (event) => {
+  const target = <HTMLElement>event.target;
+
+  if (target.closest('.car-select')){
+    const carSelect = <HTMLButtonElement>target.closest('.car-select');
+    updatedCarId = Number(carSelect.id.split('-')[1]);
+    inputCreateNewName.disabled = false;
+    inputCreateNewColor.disabled = false;
+    let selectCarName = <HTMLElement>document.getElementById(`car_name-${updatedCarId}`);
+    inputCreateNewName.value = selectCarName.innerHTML;
+    btnUpdate.disabled = false;
+  }
+
+  if (target.closest('.car-delete')){
+    const carDelete = <HTMLButtonElement>target.closest('.car-delete');
+    const deleteCarId = Number(carDelete.id.split('-')[1]);
+    deleteCarAPI(deleteCarId).then(() => updateCarsUI())
+
+
+  }
+})
+

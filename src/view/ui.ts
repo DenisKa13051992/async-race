@@ -5,8 +5,8 @@ export const createCarUI = (id: number, name: string, color: string) =>
   `<div class="car">
     <div class="car-options">
       <button class="btn car-select" id="select-${id}">Select</button>
-      <button class="btn car-delete" id="delete-${id}">Remove</button>
-      <h4 class="car-name">${name}</h4>
+      <button class="btn car-delete" id="delete-${id}">Delete</button>
+      <h4 class="car-name" id="car_name-${id}">${name}</h4>
     </div>
     <div class="car-control">
     <div class="car-control-btn"><button class="car-start" id="start-${id}">Start</button>
@@ -50,7 +50,7 @@ const createBodyUI = async () => {
         </div>
         <div class="panel-control">
           <button class="btn btn-race">race</button>
-          <button class="btn btn-reset" disabled>reset</button>
+          <button class="btn btn-reset" disabled="true">reset</button>
           <button class="btn btn-generate-cars">generate cars</button>
         </div>
       </div>
@@ -63,15 +63,15 @@ const createBodyUI = async () => {
       </div>
 
       <div class="pagination">
-        <button class="btn btn-prev">Prev</button>
-        <button class="btn btn-next">Next</button>
+        <button class="btn btn-prev" disabled="true">Prev</button>
+        <button class="btn btn-next" disabled="true">Next</button>
       </div>
 
       <div class="winners"></div>
 
     </div>
 
-    <div class="page winners-page hide">
+    <div class="page winners-page" style="display: none">
       <h1 class="title">Winners <span class="count-winners"></span></h1>
       <h3 class="title">Page <span class="page-number-winners">1</span></h3>
 

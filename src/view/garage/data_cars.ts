@@ -27,7 +27,7 @@ export const getCarColor = () => {
   function randomColor(){
     return String(Math.floor(Math.random() * 255));
   }
-  const carColor = `rgb("${randomColor()}","${randomColor()}","${randomColor()}")`
+  const carColor = `rgb(${randomColor()}, ${randomColor()}, ${randomColor()})`
   return carColor;
 };
 
