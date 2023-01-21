@@ -79,4 +79,28 @@ svg{
   margin-bottom: 10px;
 }
 
+.winners-list {
+  color: white;
+  font-size: 1vw;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.winners-list th {
+  text-align: center;
+  margin: 2px;
+  border: 1px dashed black;
+}
+
+.winners-list td {
+  text-align: center;
+  margin: 2px;
+  border: 1px dashed black;
+  vertical-align: middle;
+}
+
+.winners-list svg {
+  vertical-align: bottom;
+}
+
 

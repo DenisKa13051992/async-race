@@ -48,7 +48,6 @@ export const updateCarsUI = () => {
     let carsForRender: string = '';
     arr.forEach((car) => {
       carsForRender += `${createCarUI(car.id, car.name, car.color)}`;
-      console.log(car.color);
     });
     carsInGarage.textContent = `(${cars})`;
     carsContainer.innerHTML = carsForRender;
@@ -139,7 +138,8 @@ carsContainer.addEventListener('click', (event) => {
   if (target.closest('.car-delete')){
     const carDelete = <HTMLButtonElement>target.closest('.car-delete');
     const deleteCarId = Number(carDelete.id.split('-')[1]);
-    deleteCarAPI(deleteCarId).then(() => updateCarsUI())
+    deleteCarAPI(deleteCarId).then(() => updateCarsUI());
+    inputCreateNewName.value = '';
 
 
   }

@@ -1,4 +1,4 @@
-const garageUrl = 'http://127.0.0.1:3000/garage';
+export const garageUrl = 'http://127.0.0.1:3000/garage';
 const engine = 'http://127.0.0.1:3000/engine';
 
 export let cars = 0;
@@ -8,8 +8,6 @@ export const getCarsAPI = async (page: number) => {
   cars = Number(response.headers.get('X-Total-count'));
   return response.json();
 };
-
-export const getCarAPI = async (id: number) => (await fetch(`${garageUrl}/${id}`, { method: 'GET' })).json();
 
 export const createCarAPI = async (body: object) => {
   await fetch(garageUrl, {

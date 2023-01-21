@@ -84,7 +84,7 @@ const createBodyUI = async () => {
               <th>Wins</th>
               <th>Best time (seconds)</th>
             </tr>
-          <tbody class="container-winners">
+          <tbody class="container-winners-body">
           </tbody>
         </table>
       </div>

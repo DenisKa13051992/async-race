@@ -1,3 +1,5 @@
+import { garageUrl } from "../garage/api_garage";
+
 const winnersUrl = 'http://127.0.0.1:3000/winners';
 
 export let carsWinners: number = 0;
@@ -5,10 +7,12 @@ export let sortWinners: string = 'id';
 export let orderWinners: string = 'ASC';
 
 export const getWinnersAPI = async (page: number) => {
-  const response = await fetch(`${winnersUrl}?_page=${page}&_limit=7_sort=${sortWinners}_order=${orderWinners}`, { method: 'GET' });
+  const response = await fetch(`${winnersUrl}?_page=${page}&_limit=10_sort=${sortWinners}_order=${orderWinners}`, { method: 'GET' });
   carsWinners = Number(response.headers.get('X-Total-count')); console.log(carsWinners)
   return response.json();
 };
+
+export const getCarAPIByIdFromGarage = async (id: number) => (await fetch(`${garageUrl}/${id}`, { method: 'GET' })).json();
 
 export const getWinnerAPI = async (id: number) => {
   const response = await fetch(`${winnersUrl}/${id}`, { method: 'GET' });
@@ -40,3 +44,5 @@ export const updateWinneAPI = async (body: object, id: number) => {
     },
   });
 };
+
+
