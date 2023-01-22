@@ -1,4 +1,5 @@
 import { carImg } from '../essets/car';
+import { finishSign } from '../essets/finishSign';
 
 
 export const createCarUI = (id: number, name: string, color: string) =>
@@ -12,7 +13,7 @@ export const createCarUI = (id: number, name: string, color: string) =>
     <div class="car-control-btn"><button class="car-start" id="start-${id}">Start</button>
     <button class="car-stop" id="stop-${id}" disabled="true">Stop</button></div>
       <div class="car-img" id="car-${id}">${carImg(color)}</div>
-      <div class="finishSign"></div>
+      <div class="finishSign">${finishSign}</div>
     </div>
   </div>
 `;
@@ -69,6 +70,9 @@ const createBodyUI = async () => {
 
       <div class="winners"></div>
 
+    </div>
+
+    <div class="winner-message" style="display: none">
     </div>
 
     <div class="page winners-page" style="display: none">

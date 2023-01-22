@@ -1,4 +1,5 @@
 import { createCarUI } from '../ui';
+import { winnerMessage } from './animation';
 import { createCarAPI, cars, getCarsAPI, updateCarAPI, ArraysOfCars, deleteCarAPI } from './api_garage';
 import { getCarColor, getCarModel } from './data_cars';
 
@@ -145,3 +146,6 @@ carsContainer.addEventListener('click', (event) => {
   }
 })
 
+garagePage.addEventListener('click', () => {
+  if (winnerMessage.style.display === 'block') winnerMessage.style.display = 'none';
+})

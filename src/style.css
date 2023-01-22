@@ -103,4 +103,29 @@ svg{
   vertical-align: bottom;
 }
 
+.finish {
+  width: 30px;
+  height: 30px;
+}
+
+.car-control {
+  position: relative;
+}
+
+.finishSign {
+  position: absolute;
+  right: 0px;
+  top: 10px;
+}
+
+.winner-message {
+  width: 200px;
+  height: 100px;
+  color: aliceblue;
+  position: absolute;
+  top: 50%;
+  right: 45%;
+  vertical-align: middle;
+  text-align: center;
+}
 

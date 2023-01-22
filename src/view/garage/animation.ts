@@ -1,6 +1,11 @@
-import { driveCarAPI, startEngineAPI, stopEngineAPI } from "./api_garage"
+import { ArraysOfCars, driveCarAPI, getCarsAPI, startEngineAPI, stopEngineAPI } from "./api_garage"
+import { pageNumber, updateCarsUI } from "./garage_events";
 
 const carsContainer = <HTMLElement>document.querySelector('.cars-container');
+const btnRace = <HTMLButtonElement>document.querySelector('.btn-race');
+const btnReset = <HTMLButtonElement>document.querySelector('.btn-reset');
+export const winnerMessage = <HTMLElement>document.querySelector('.winner-message');
+
 const startPositionWidth: number = 160;
 let frameId: {
   id: number;
@@ -40,6 +45,12 @@ const animationMove = (carHTML: HTMLElement, way: number, time: number) => {
       frameId.id = window.requestAnimationFrame(getStep);
       carHTML.style.transform = `translateX(${progressWay}px)`;
     } else {carHTML.style.transform = `translateX(${way}px)`;}
+    if (progressWay > way && winnerMessage.style.display === 'none'){
+      const idWin = Number(carHTML.id.split('-')[1]);
+      winnerMessage.style.display = 'block';
+      const nameWin = <HTMLElement>document.getElementById(`car_name-${idWin}`)
+      winnerMessage.innerHTML = `${nameWin.innerHTML} WON! ${Math.round(time) / 1000}s`
+    }
   };
 
   frameId.id = window.requestAnimationFrame(getStep);
@@ -53,6 +64,21 @@ export const animationMoveStop = (idCar: number) => {
     carStop.style.transform = 'translateX(0px)';
   });
 };
+
+const startRace = async (page: number) => {
+  const arr: ArraysOfCars[] = await getCarsAPI(page);
+  for (let ar of arr) {
+    animation(ar.id);
+  }
+}
+
+const stopRace = async (page: number) => {
+  const arr: ArraysOfCars[] = await getCarsAPI(page);
+  for (let ar of arr) {
+    animationMoveStop(ar.id);
+  }
+}
+
 
 carsContainer.addEventListener('click', (event) => {
   const target = <HTMLElement>event.target;
@@ -73,6 +99,38 @@ carsContainer.addEventListener('click', (event) => {
     carStop.disabled = true;
     carStart.disabled = false;
   }
+
+
 });
 
+btnRace.addEventListener('click', () => {
 
+    const carAllStart = <NodeListOf<HTMLButtonElement>>document.querySelectorAll('.car-start');
+    const carAllStop = <NodeListOf<HTMLButtonElement>>document.querySelectorAll('.car-stop');
+    startRace(pageNumber);
+    btnRace.disabled = true;
+    btnReset.disabled = false;
+    for (let carStart of carAllStart) {carStart.disabled = true;}
+    for (let carStop of carAllStop) {carStop.disabled = false;}
+
+})
+
+btnReset.addEventListener('click', () => {
+  const AllCarsImg = <NodeListOf<HTMLButtonElement>>document.querySelectorAll('.car-img');
+  const carAllStart = <NodeListOf<HTMLButtonElement>>document.querySelectorAll('.car-start');
+  const carAllStop = <NodeListOf<HTMLButtonElement>>document.querySelectorAll('.car-stop');
+  // stopRace(pageNumber);
+  for (let carsImg of AllCarsImg){
+    if (carsImg.style.transform !== 'translateX(0px)'){
+      updateCarsUI();
+    }
+  }
+
+  updateCarsUI();
+
+  btnReset.disabled = true;
+  btnRace.disabled = false;
+  for (let carStart of carAllStart) {carStart.disabled = false;}
+  for (let carStop of carAllStop) {carStop.disabled = true;}
+
+})

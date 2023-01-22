@@ -1,5 +1,6 @@
 console.log('good job')
 import './style.css'
+import './essets/finishSign'
 import './view/ui'
 import './view/garage/api_garage'
 import './view/garage/garage_events'
