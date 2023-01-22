@@ -1,5 +1,5 @@
 export const garageUrl = 'http://127.0.0.1:3000/garage';
-const engine = 'http://127.0.0.1:3000/engine';
+export const engine = 'http://127.0.0.1:3000/engine';
 
 export let cars = 0;
 
@@ -25,6 +25,7 @@ export const deleteCarAPI = async (id: number) => {
   });
 };
 
+
 export const updateCarAPI = async (body: object, id: number) => {
   await fetch(`${garageUrl}/${id}`, {
     method: 'PUT',
@@ -35,9 +36,9 @@ export const updateCarAPI = async (body: object, id: number) => {
   });
 };
 
-export const startEngineAPI = async (id: number) => (await fetch(`${engine}?id=${id}&status=started`, { method: 'PATCH' })).json();
-export const stopEngineAPI = async (id: number) => (await fetch(`${engine}?id=${id}&status=stopped`, { method: 'PATCH' })).json();
-export const driveCarAPI = async (id: number) => {
+export const startEngineAPI = async (id: number): Promise<{ velocity: number; distance: number }> => (await fetch(`${engine}?id=${id}&status=started`, { method: 'PATCH' })).json();
+export const stopEngineAPI = async (id: number): Promise<{ velocity: number; distance: number }>  => (await fetch(`${engine}?id=${id}&status=stopped`, { method: 'PATCH' })).json();
+export const driveCarAPI = async (id: number): Promise<{ success: boolean }> => {
   const response = await fetch(`${engine}?id=${id}&status=drive`, { method: 'PATCH' }).catch();
   return response.status !== 200 ? { success: false } : { ...(await response.json()) };
 };

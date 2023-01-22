@@ -1,4 +1,4 @@
-import { garageUrl } from "../garage/api_garage";
+import { engine, garageUrl } from "../garage/api_garage";
 
 const winnersUrl = 'http://127.0.0.1:3000/winners';
 
@@ -35,7 +35,7 @@ export const deleteWinnerAPI = async (id: number) => {
   });
 };
 
-export const updateWinneAPI = async (body: object, id: number) => {
+export const updateWinnerAPI = async (body: object, id: number) => {
   await fetch(`${winnersUrl}/${id}`, {
     method: 'PUT',
     body: JSON.stringify(body),
@@ -44,5 +44,6 @@ export const updateWinneAPI = async (body: object, id: number) => {
     },
   });
 };
+
 
 
