@@ -33,7 +33,7 @@ const createBodyUI = async () => {
   root.innerHTML = `
     <header class="header">
       <div class="nav">
-        <button class="btn btn-garage">Garage</button>
+        <button class="btn btn-garage" disabled="true">Garage</button>
         <button class="btn btn-winners">Winners</button>
       </div>
     </header>
@@ -85,8 +85,8 @@ const createBodyUI = async () => {
               <th>Number</th>
               <th>Car</th>
               <th>Name</th>
-              <th>Wins</th>
-              <th>Best time (seconds)</th>
+              <th id="winsTimes">Wins</th>
+              <th id="winsBestTime">Best time (seconds)</th>
             </tr>
           <tbody class="container-winners-body">
           </tbody>
@@ -101,16 +101,15 @@ const createBodyUI = async () => {
     </div>
 
     <footer class="footer">
-          <div class="rsschool">
+    <div class="me">
+    <a href="https://github.com/DenisKa13051992">Denis Karnachenko 2023<br>
+    </a>
+    </div>
+    <div class="rsschool">
             <div><a href="https://rs.school/js/">©RSSchool JavaScript/Front-end 2022Q3<br>
-
             </a></div>
           </div>
-          <div class="me">
-            <a href="https://github.com/DenisKa13051992">Denis Karnachenko 2023<br>
 
-            </a>
-          </div>
     </footer>
   `;
   document.body.appendChild(root);

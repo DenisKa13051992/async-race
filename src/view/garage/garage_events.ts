@@ -8,8 +8,8 @@ const carsContainer = <HTMLElement>document.querySelector('.cars-container');
 const generateCars = <HTMLElement>document.querySelector('.generate-cars');
 const btnGenerateCars = <HTMLElement>document.querySelector('.btn-generate-cars');
 const carsInGarage = <HTMLElement>document.querySelector('.cars-in-garage');
-const btnGarage = <HTMLElement>document.querySelector('.btn-garage');
-export const btnWinners = <HTMLElement>document.querySelector('.btn-winners');
+const btnGarage = <HTMLInputElement>document.querySelector('.btn-garage');
+export const btnWinners = <HTMLInputElement>document.querySelector('.btn-winners');
 const btnUpdate = <HTMLInputElement>document.querySelector('.btn-update');
 const inputCreateNewName = <HTMLInputElement>document.querySelector('.input-create-new-name');
 const inputCreateColor = <HTMLInputElement>document.querySelector('.input-create-color');
@@ -25,20 +25,24 @@ export let pageNumber = 1;
 
 
 export const checkCars = () =>{ getCarsAPI(pageNumber).then(() => {
-if (cars / 7 > pageNumber) {btnNext.disabled = false; console.log(cars / 7, pageNumber)};
-if (pageNumber === 1) {btnPrev.disabled = true; console.log(cars / 7, pageNumber)}
-if (pageNumber > 1) {btnPrev.disabled = false; console.log(cars / 7, pageNumber)}
+if (cars / 7 > pageNumber) {btnNext.disabled = false;} else {btnNext.disabled = true;}
+if (pageNumber === 1) {btnPrev.disabled = true;}
+if (pageNumber > 1) {btnPrev.disabled = false;}
 })}
 checkCars();
 
 btnGarage.addEventListener('click', () => {
   winnersPage.style.display = 'none';
   garagePage.style.display = 'block';
+  btnGarage.disabled = true;
+  btnWinners.disabled = false;
 });
 
 btnWinners.addEventListener('click', () => {
   garagePage.style.display = 'none';
   winnersPage.style.display = 'block';
+  btnWinners.disabled = true;
+  btnGarage.disabled = false;
 });
 
 

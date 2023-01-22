@@ -129,3 +129,21 @@ svg{
   text-align: center;
 }
 
+button {
+  cursor: pointer;
+}
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+a {
+  color: aliceblue;
+}
+
+#winsBestTime, #winsTimes{
+  cursor: pointer;
+}

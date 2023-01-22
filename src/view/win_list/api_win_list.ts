@@ -6,9 +6,15 @@ export let carsWinners: number = 0;
 export let sortWinners: string = 'id';
 export let orderWinners: string = 'ASC';
 
+export const changeSort = (typeSort: string) => {
+  if (sortWinners === typeSort) {if (orderWinners === 'ASC') {orderWinners = 'DESC'} else orderWinners = 'ASC'}
+  else {sortWinners = typeSort; }
+
+}
+
 export const getWinnersAPI = async (page: number) => {
-  const response = await fetch(`${winnersUrl}?_page=${page}&_limit=10_sort=${sortWinners}_order=${orderWinners}`, { method: 'GET' });
-  carsWinners = Number(response.headers.get('X-Total-count')); console.log(carsWinners)
+  const response = await fetch(`${winnersUrl}?_page=${page}&_limit=10&_sort=${sortWinners}&_order=${orderWinners}`, { method: 'GET' });
+  carsWinners = Number(response.headers.get('X-Total-count'));
   return response.json();
 };
 
