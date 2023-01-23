@@ -16,6 +16,10 @@
   "plugins": ["@typescript-eslint"],
   "ignorePatterns": ["*.config.js", "node_modules/", "dist/"],
   "rules": {
+    "no-debugger": "off",
+        "no-console": 0,
+        "class-methods-use-this": "off",
+        "@typescript-eslint/no-explicit-any": 2,
     "max-len": ["warn", { "code": 120 }],
     "indent": [
       "warn",

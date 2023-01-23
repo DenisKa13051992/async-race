@@ -1,7 +1,6 @@
 import { carImg } from '../essets/car';
 import { finishSign } from '../essets/finishSign';
 
-
 export const createCarUI = (id: number, name: string, color: string) =>
   `<div class="car">
     <div class="car-options">
@@ -18,7 +17,13 @@ export const createCarUI = (id: number, name: string, color: string) =>
   </div>
 `;
 
-export const createWinnerUI = ( num: number, color: string, name: string, wins: number, bestTime: number) =>
+export const createWinnerUI = (
+  num: number,
+  color: string,
+  name: string,
+  wins: number,
+  bestTime: number,
+) =>
   `<tr>
     <td>${num}</td>
     <td>${carImg(color)}</td>
@@ -115,4 +120,3 @@ const createBodyUI = async () => {
   document.body.appendChild(root);
 };
 createBodyUI();
-
